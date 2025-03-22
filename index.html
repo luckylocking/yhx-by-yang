@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>點擊</title>
+    <title>浩翔❤️</title>
     <style>
         body {
             display: flex;
@@ -31,29 +31,24 @@
 </head>
 
 <body>
-    <img id="cat" src="482383600_9894683957210595_1355209963900559286_n-removebg-preview.png" alt="浩翔❤️"
-        onclick="clickCat()">
+    <img id="cat" src="482383600_9894683957210595_1355209963900559286_n-removebg-preview.png" alt="浩翔❤️">
     <div id="counter">點擊次數: 0</div>
-
-    <!-- 音效 -->
-    <audio id="clickSound" src="3月22日.MP3"></audio>
 
     <script>
         let count = 0;
+        const cat = document.getElementById("cat");
+        const counter = document.getElementById("counter");
+
         function clickCat() {
-            const cat = document.getElementById("cat");
-            const counter = document.getElementById("counter");
-            const sound = document.getElementById("clickSound");
+            // 播放音效，確保每次點擊都有新的音效播放
+            const sound = new Audio("3月22日.MP3");  // 建議將 `3月22日.MP3` 改成 `click.mp3` 或其他英文名稱
+            sound.play().catch(error => console.log("音效播放失敗", error));
 
-            // 播放音效
-            sound.currentTime = 0; // 重置音效，讓每次點擊都能播放
-            sound.play();
-
-            // 變換圖片與縮放
-            cat.src = "484998174_974840668122802_793425221837239973_n-removebg-preview.png";
+            // 變換圖片並強制刷新避免快取
+            cat.src = `484998174_974840668122802_793425221837239973_n-removebg-preview.png?t=${new Date().getTime()}`;
             cat.style.transform = "scale(1.1)";
             setTimeout(() => {
-                cat.src = "482383600_9894683957210595_1355209963900559286_n-removebg-preview.png";
+                cat.src = `482383600_9894683957210595_1355209963900559286_n-removebg-preview.png?t=${new Date().getTime()}`;
                 cat.style.transform = "scale(1)";
             }, 100);
 
@@ -61,6 +56,10 @@
             count++;
             counter.innerText = `點擊次數: ${count}`;
         }
+
+        // 讓手機也能正確觸發點擊
+        cat.addEventListener("click", clickCat);
+        cat.addEventListener("touchstart", clickCat);
     </script>
 </body>
 
