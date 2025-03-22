@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點擊</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #cat {
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        #counter {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="cat" src="482383600_9894683957210595_1355209963900559286_n-removebg-preview.png" alt="浩翔❤️"
+        onclick="clickCat()">
+    <div id="counter">點擊次數: 0</div>
+
+    <!-- 音效 -->
+    <audio id="clickSound" src="3月22日.MP3"></audio>
+
+    <script>
+        let count = 0;
+        function clickCat() {
+            const cat = document.getElementById("cat");
+            const counter = document.getElementById("counter");
+            const sound = document.getElementById("clickSound");
+
+            // 播放音效
+            sound.currentTime = 0; // 重置音效，讓每次點擊都能播放
+            sound.play();
+
+            // 變換圖片與縮放
+            cat.src = "484998174_974840668122802_793425221837239973_n-removebg-preview.png";
+            cat.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                cat.src = "482383600_9894683957210595_1355209963900559286_n-removebg-preview.png";
+                cat.style.transform = "scale(1)";
+            }, 100);
+
+            // 更新點擊次數
+            count++;
+            counter.innerText = `點擊次數: ${count}`;
+        }
+    </script>
+</body>
+
+</html>
